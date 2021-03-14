@@ -6,9 +6,9 @@ import java.math.BigDecimal;
 
 public class Calculator {
     private final FragmentOne parent;
-    private BigDecimal leftOperand , rightOperand; //number1 is the current solution stored in the calculator, number2 is the value used in whatever calculation is done to number1
+    private BigDecimal leftOperand , rightOperand; //Holds values for arithmetic
     private StringBuilder inputBuffer ; //Buffer for input values
-    private String outputBuffer, operationBuffer ; //Buffer for operations
+    private String outputBuffer, operationBuffer ; //Buffer for operations and output
     private boolean inputAccumulate; //True - input is appended to the current input value; False - input replaces the current input value
 
     public Calculator(FragmentOne parent) {
@@ -209,6 +209,9 @@ public class Calculator {
 
             //Put an addition operation in the operation buffer
             operationBuffer = "add";
+
+            //Reset accumulate
+            inputAccumulate = false;
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnMinus) ) ) {
@@ -229,6 +232,9 @@ public class Calculator {
 
             //Put an addition operation in the operation buffer
             operationBuffer = "subtract";
+
+            //Reset accumulate
+            inputAccumulate = false;
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnDiv) ) ) {
@@ -249,6 +255,9 @@ public class Calculator {
 
             //Put an addition operation in the operation buffer
             operationBuffer = "divide";
+
+            //Reset accumulate
+            inputAccumulate = false;
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnMul) ) ) {
@@ -269,6 +278,9 @@ public class Calculator {
 
             //Put an addition operation in the operation buffer
             operationBuffer = "multiply";
+
+            //Reset accumulate
+            inputAccumulate = false;
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnPer) ) ) {
@@ -289,6 +301,9 @@ public class Calculator {
 
             //Put an addition operation in the operation buffer
             operationBuffer = "modulo";
+
+            //Reset accumulate
+            inputAccumulate = false;
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnEq) ) ) {
@@ -314,6 +329,9 @@ public class Calculator {
             temp = BigDecimal.valueOf((Math.pow((temp.doubleValue()),0.5)));
             inputBuffer.replace(0, inputBuffer.length(), temp.toString());
             outputBuffer = inputBuffer.toString();
+
+            //Reset accumulate
+            inputAccumulate = false;
         }
 
         if ( button.equals( parent.getResources().getString(R.string.btnSign) ) ) {
