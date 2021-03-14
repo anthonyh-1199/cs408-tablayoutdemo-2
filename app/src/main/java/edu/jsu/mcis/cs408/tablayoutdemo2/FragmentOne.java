@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.lang.reflect.Field;
+
 public class FragmentOne extends Fragment implements TabFragment {
 
     private final String title = "Fragment One";
@@ -21,16 +23,24 @@ public class FragmentOne extends Fragment implements TabFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        calculator = new Calculator(this);
-
         return inflater.inflate(R.layout.fragment_one, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        calculator = new Calculator(this);
         //outputField = (TextView) view.findViewById(R.id.outputField1); COMMENT THIS OUT
-        //view.findViewById(R.id.button).setOnClickListener(this::onClick);
+
+        //Button iterator
+        Field[] fields = R.id.class.getFields();
+        for (int i = 0; i < fields.length; ++i) {
+            String name = fields[i].getName();
+            if (name.length() >= 3 && name.substring(0, 3).equals("btn")) {
+                int id = getResources().getIdentifier(name, "id", getActivity().getPackageName());
+                view.findViewById(id).setOnClickListener(this::onClick);
+            }
+        }
     }
 
     public void onClick(View v) {
