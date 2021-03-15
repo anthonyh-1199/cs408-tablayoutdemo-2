@@ -30,6 +30,10 @@ public class FragmentTwo extends Fragment implements TabFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        totalBill = (TextInputEditText) view.findViewById(R.id.totalBill);
+        tipPercentage = (TextInputEditText) view.findViewById(R.id.tipPercentage);
+        numberPeople = (TextInputEditText) view.findViewById(R.id.numberPeople);
         view.findViewById(R.id.buttonCalculate).setOnClickListener(this::onClick);
     }
 
