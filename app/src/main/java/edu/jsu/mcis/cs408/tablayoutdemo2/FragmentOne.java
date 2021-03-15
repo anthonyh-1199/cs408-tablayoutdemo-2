@@ -16,7 +16,6 @@ import java.lang.reflect.Field;
 public class FragmentOne extends Fragment implements TabFragment {
 
     private final String title = "Calculator";
-    private TextView outputField;
     private Calculator calculator;
 
     @Nullable
@@ -47,7 +46,7 @@ public class FragmentOne extends Fragment implements TabFragment {
     public void onClick(View v) {
         String button = ((Button) v).getText().toString();       // get input button text
         calculator.process(button);                              // pass input to Calculator for processing
-        TextView display = (TextView)getView().findViewById(R.id.display); // acquire reference to display TextView
+        TextView display = getView().findViewById(R.id.display); // acquire reference to display TextView
         display.setText(calculator.getDisplay());                // show updated display buffer from Calculator
     }
 
